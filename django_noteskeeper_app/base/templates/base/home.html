@@ -1,0 +1,42 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<main class="layout layout--3">
+    <div class="container">
+        <div class="boards">
+            <div class="boards__header">
+                <div>
+                    <h2>Boards</h2>
+                </div>
+                <a class="btn btn--main" href="{% url 'create-board' %}">Create Board</a>
+            </div>
+            {% for board in boards %}
+            <div class="boardListBoard">
+                <div class="boardListBoard__header">
+                    <a href="{% url 'profile' board.owner.id %}" class="boardListBoard__author">
+                    <span>@{{board.owner}}</span>
+                    </a>
+                <div class="boardListBoard__actions">
+                    <span>{{board.created|timesince}}</span>
+                </div>
+                </div>
+                <div class="boardListBoard__content">
+                    <a href="{% url 'board' board.id %}">{{board.name}}</a>
+                </div>
+                <div class="boardListBoard__meta">
+                    <p class="boardListBoard__topic">Number of Notes: {{board.note_set.all.count}}</p>
+                </div>
+                {% if request.user == board.owner %}
+                <div class="boardListBoard__actions">
+                    <a class="btn btn--action" href="{% url 'update-board' board.id %}">Rename</a>
+                    <a class="btn btn--action" href="{% url 'delete-board' board.id %}">Delete</a>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+
+{% endblock %}

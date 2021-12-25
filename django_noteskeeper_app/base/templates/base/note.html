@@ -1,0 +1,28 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<main class="note-page layout layout--3">
+    <div class="container">
+        <div class="note">
+            <div class="note__header">
+                <div>
+                    <h2>{{ current_note.topic }}</h2>
+                </div>
+            </div>
+            <div class="noteContentList">
+                <div class="boardNotesList__contentViewer">
+                    <p class="boardNotesList__bodyViewer">{{ current_note.body }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- <div>
+    <label>{{ current_note.topic }}</label>
+    <p>{{ current_note.body }}</p>
+    <hr>
+</div> -->
+
+{% endblock %}
