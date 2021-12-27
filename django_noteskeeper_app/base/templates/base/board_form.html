@@ -15,11 +15,11 @@
                 <form class="form" method="POST">
                     {% csrf_token %}
                     <div class="form__group">
-                        <label for="board_name">Board Name</label>
+                        <label>Board Name</label>
                         {{form.name}}
                     </div>
                     <div class="form__action">
-                        <a class="btn btn--dark" href="">Cancel</a>
+                        <a class="btn btn--dark" href="{{request.META.HTTP_REFERER}}">Cancel</a>
                         <button class="btn btn--main" type="submit">Create/Update Board</button>
                     </div>
                 </form>

@@ -23,7 +23,7 @@
                         {{form.body}}
                     </div>
                     <div class="form__action">
-                        <a class="btn btn--dark" href="">Cancel</a>
+                        <a class="btn btn--dark" href="{{request.META.HTTP_REFERER}}">Cancel</a>
                         <button class="btn btn--main" type="submit">Create/Update Note</button>
                     </div>
                 </form>

@@ -54,7 +54,7 @@ body {
     font-weight: 400;
     font-size: 1.5rem;
     color: black;
-    background-color: var(--color-concrete);
+    background-color: var(--color-dark);
     min-height: 100vh;
 }
 
@@ -156,7 +156,7 @@ a {
 
 .header {
     padding: 1.5rem;
-    background-color: var(--color-royal);
+    background-color: var(--color-concrete);
 }
 
 .header > .container {
@@ -175,4 +175,184 @@ a {
     font-weight: 700;
     font-size: 2rem;
     color: var(--color-light);
+}
+
+.header__search > label {
+    background-color: var(--color-dark);
+    padding: 1.3rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 4px;
+}
+  
+.header__search svg {
+    fill: var(--color-red-orange);
+    width: 2rem;
+    height: 2rem;
+    margin-left: 1rem;
+}
+  
+.header__search input {
+    width: 30rem;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--color-red-orange);
+}
+
+.page__title {
+    color: var(--color-red-orange);
+}
+
+.header__menu {
+    margin-left: auto;
+    position: relative;
+
   }
+  
+.header__menu a {
+    padding-top: 1.2rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    font-weight: 500;
+    text-decoration: none;
+    color: black;
+}
+
+.header__menu p {
+    line-height: 1.2;
+  }
+  
+.header__menu span {
+    color: black;
+    font-weight: 500;
+    font-size: 1.6rem;
+    display: block;
+}
+  
+.header__menu svg {
+    width: 1.6rem;
+    height: 1.6rem;
+    fill: var(--color-red-orange);
+}
+
+.header__user button {
+    padding-top: 1.2rem;
+}
+  
+.dropdown-button {
+    background: transparent;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+}
+  
+.dropdown-button:hover svg {
+    fill: var(--color-light-gray);
+}
+
+.header__menu span:hover {
+    text-decoration: underline;
+}
+
+/* ######## LAYOUT ######## */
+
+.layout {
+    margin-top: 2.4rem;
+}
+  
+.layout > .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+/* ######## LAYOUT BOX ######## */
+
+.layout__box {
+    width: 90%;
+    max-width: 48rem;
+    min-height: 40rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -46%);
+    background-color: var(--color-concrete);
+    border-radius: 1rem;
+    box-shadow: 1px 1px 6px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.layout__boxHeader {
+    display: flex;
+    padding: 1.5rem;
+    /* background: red; */
+}
+
+.layout__boxTitle{
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    align-items: center;
+    /* background: chartreuse; */
+}
+
+.layout__boxTitle h3 {
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.layout__boxTitle a {
+    text-transform: uppercase;
+    color: var(--color-red-orange);
+    font-weight: 500;
+}
+
+.layout__body{
+    margin: 3rem;
+}
+
+/* ######## HOME PAGE ######## */
+
+.boardListBoard {
+    background: #ADB3C1;
+}
+
+/* ######## CREATE/UPDATE BOARD ######## */
+
+.form__group{
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.form__group label {
+    display: block;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: black;
+}
+
+.form__group input{
+    background: var(--color-dark);
+    outline: none;
+    border: 1px solid;
+    padding: 1rem;
+    border-radius: 3px;
+    width: 100%;
+    color: var(--color-red-orange);
+    font-weight: 500;
+}
+
+.form__group input:focus {
+    border-color: var(--color-red-orange);
+}
+
+.form__action {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 18rem;
+    gap: 3rem;
+}
+
