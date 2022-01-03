@@ -3,39 +3,47 @@
 {% block content %}
 
 <main class="board-page layout layout--3">
-    <div class="container">
+    <div class="container-lg">
         <div class="board">
             <div class="board__header">
                 <div>
-                    <h2>{{user_board.name}}</h2>
+                    <h2 class="text-center mt-3">{{user_board.name}}</h2>
                 </div>
             </div>
-            <div class="boardNotesList">
+            <!-- <div class="boardNotesList"> -->
+            <div class="row">
+                <div class="col-xl-4" style="padding: 20px;">
+                    <div class="container border" style="height: 200px; width: 90%;">
+                        {% if request.user == user_board.owner %}
+                            <a href="{% url 'create-note' user_board.id %}" class="btn btn--main">Add Note</a>
+                        {% endif %}
+                    </div>
+                </div>
                 {% for note in notes %}
-                    {% if request.user == user_board.owner %}
-                        <div class="boardNotesList__headerOwner">
-                            <a href="{% url 'update-note' note.id %}" class="boardNotesList__topicOwner">{{ note.topic }}</a>
+                    <div class="col-xl-4" style="padding: 20px;">
+                        <div class="container border" style="height: 200px; width: 90%;">
+                            {% if request.user == user_board.owner %}
+                                <div class="boardNotesList__headerOwner">
+                                    <a href="{% url 'update-note' note.id %}" class="boardNotesList__topicOwner">{{ note.topic }}</a>
+                                </div>
+                                <div class="boardNotesList__contentOwner">
+                                    <p class="boardNotesList__bodyOwner">{{ note.body }}</p>
+                                </div>
+                                <div class="boardNotesList__actions">
+                                    <a href="{% url 'delete-note' note.id %}" class="btn btn--action">Delete</a>
+                                </div>
+                            {% else %}
+                                <div class="boardNotesList__headerViewer">
+                                    <a href="{% url 'note' note.id %}" class="boardNotesList__topicViewer">{{ note.topic }}</a>
+                                </div>
+                                <div class="boardNotesList__contentViewer">
+                                    <p class="boardNotesList__bodyViewer">{{ note.body }}</p>
+                                </div>
+                            {% endif %}
                         </div>
-                        <div class="boardNotesList__contentOwner">
-                            <p class="boardNotesList__bodyOwner">{{ note.body }}</p>
-                        </div>
-                        <div class="boardNotesList__actions">
-                            <a href="{% url 'delete-note' note.id %}" class="btn btn--action">Delete</a>
-                        </div>
-                        {% else %}
-                        <div class="boardNotesList__headerViewer">
-                            <a href="{% url 'note' note.id %}" class="boardNotesList__topicViewer">{{ note.topic }}</a>
-                        </div>
-                        <div class="boardNotesList__contentViewer">
-                            <p class="boardNotesList__bodyViewer">{{ note.body }}</p>
-                        </div>
-                    {% endif %}
+                    </div>
                 {% endfor %}
-            </div>
-            <div class="addNote">
-                {% if request.user == user_board.owner %}
-                    <a href="{% url 'create-note' user_board.id %}" class="btn btn--main">Add Note</a>
-                {% endif %}
+                <!-- <div class="addNote"> -->
             </div>
         </div>
     </div>
