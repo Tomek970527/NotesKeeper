@@ -2,42 +2,25 @@
 
 {% block content %}
 
-<main class="boardForm layout">
-    <div class="container-lg">
-        <div class="layout__boxHeader">
-            <div class="layout__boxTitle">
-                <h3 class="text-center mt-3">Create/Update Your Board</h3>
+<main>
+    <div class="container px-4" style="background-color: lightgray;">
+        <h3 class="text-center mt-4 py-4">Create | Update Your Board</h3>
+        <form class="row py-4" action="" method="POST">
+            {% csrf_token %}
+            <div class="col-12">
+                <label for="inputBoardName" class="form-label">Board Name</label>
+                {% if form.name.value != None %}
+                    <input required type="text" class="form-control" id="inputBoardName" value="{{form.name.value}}" name="name" />
+                {% else %}
+                    <input required type="text" class="form-control" id="inputBoardName" name="name" placeholder="Choose name for this board..." />
+                {% endif %}
             </div>
-        </div>
-        <div class="m-4">
-            <form action="/examples/actions/confirmation.php" method="post">
-                <div class="row mb-3">
-                    <label for="inputEmail" class="col-sm-2 col-form-label">Board Name</label>
-                    <div class="col-sm-10">
-                        <input type="email" class="form-control" id="inputEmail" placeholder="Email" required>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control" id="inputPassword" placeholder="Password" required>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-sm-10 offset-sm-2">
-                        <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="checkRemember">
-                                <label class="form-check-label" for="checkRemember">Remember me</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-10 offset-sm-2">
-                        <button type="submit" class="btn btn-primary">Sign in</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+            <div class="col-12 gy-4">
+                <button type="submit" class="btn btn-primary">Create | Update</button>
+                <a class="btn btn-primary" href="{{request.META.HTTP_REFERER}}" style="margin: 10px;">Cancel</a>
+            </div>
+        </form>
+    </div>
         <!-- <div class="layout__box">
             <div class="layout__boxHeader">
                 <div class="layout__boxTitle">
@@ -59,7 +42,6 @@
                 </form>
             </div>
         </div> -->
-    </div>
 </main>
 
 

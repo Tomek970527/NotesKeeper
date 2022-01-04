@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel&family=Josefin+Sans&family=Oswald:wght@500&family=Poppins:wght@400;700&family=Roboto:wght@300&display=swap');
 
 /* WORKING WITH BOOTSTRAP */
+.btn-work {
+    text-align: center;
+}
+
 
 :root {
     /* --color-main: #71c6dd;
@@ -23,6 +27,8 @@
     --color-slate: #ADB3C1;
     --color-off-white: #F9F9F9;
   }
+
+
 
 /* ############ BASE ############ */
 
