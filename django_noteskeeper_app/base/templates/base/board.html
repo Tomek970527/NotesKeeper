@@ -12,12 +12,18 @@
             </div>
             <!-- <div class="boardNotesList"> -->
             <div class="row">
-                <div class="col-xl-4" style="padding: 20px;">
+                <!-- <div class="col-xl-4" style="padding: 20px;">
                     <div class="container border" style="height: 200px; width: 90%;">
                         {% if request.user == user_board.owner %}
                             <a href="{% url 'create-note' user_board.id %}" class="btn btn--main">Add Note</a>
                         {% endif %}
                     </div>
+
+                </div> -->
+                <div class="col-xl-4" style="padding: 20px;">
+                    {% if request.user == user_board.owner %}
+                        <a href="{% url 'create-note' user_board.id %}" style="padding: 20px;"><button class="btn btn-primary" style="height: 200px; width: 90%;"><h3 class="text-white">Add Note</h3></button></a>
+                    {% endif %}
                 </div>
                 {% for note in notes %}
                     <div class="col-xl-4" style="padding: 20px;">

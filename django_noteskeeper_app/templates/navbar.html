@@ -1,15 +1,15 @@
 <div class="m-4">
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container-fluid">
-          <a href="{% url 'home' %}" class="navbar-brand">NotesKeeper</a>
+          <a href="{% url 'home' %}" class="navbar-brand"><span class="text-warning">Notes</span>Keeper</a>
           <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
               <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
               <form method="GET" action="{% url 'home' %}" class="d-flex">
                   <div class="input-group">
-                      <input type="text" name="search" placeholder="Search for boards..." class="form-control">
-                      <button type="button" class="btn btn-secondary"><i class="bi-search"></i></button>
+                      <input type="text" name="search" placeholder="Search for boards..." class="form-control text-white" style="background-color: #121212;">
+                      <button type="button" class="btn btn-warning"><i class="bi-search"></i></button>
                   </div>
               </form>
               {% if not request.user.is_authenticated %}
