@@ -3,16 +3,16 @@
 {% block content %}
 
 <main>
-    <div class="container px-4" style="background-color: lightgray;">
-        <h3 class="text-center mt-4 py-4">Create | Update Your Board</h3>
+    <div class="container rounded border border-white px-4" style="background-color: #121212; width:50%; margin-top: 200px;">
+        <h3 class="text-center mt-4 py-4 text-white">Create | Update Your Board</h3>
         <form class="row py-4" action="" method="POST">
             {% csrf_token %}
             <div class="col-12">
-                <label for="inputBoardName" class="form-label">Board Name</label>
+                <label for="inputBoardName" class="form-label text-white">Board Name</label>
                 {% if form.name.value != None %}
-                    <input required type="text" class="form-control" id="inputBoardName" value="{{form.name.value}}" name="name" />
+                    <input required type="text" class="form-control  text-white" id="inputBoardName" value="{{form.name.value}}" name="name" style="background-color: #121212;" />
                 {% else %}
-                    <input required type="text" class="form-control" id="inputBoardName" name="name" placeholder="Choose name for this board..." />
+                    <input required type="text" class="form-control  text-white" id="inputBoardName" name="name" placeholder="Choose name for this board..." style="background-color: #121212;" />
                 {% endif %}
             </div>
             <div class="col-12 gy-4">
@@ -21,27 +21,6 @@
             </div>
         </form>
     </div>
-        <!-- <div class="layout__box">
-            <div class="layout__boxHeader">
-                <div class="layout__boxTitle">
-                    <a href="{% url 'home' %}">Home</a>
-                    <h3>Create/Update Your Board</h3>
-                </div>
-            </div>
-            <div class="layout__body">
-                <form class="form" method="POST">
-                    {% csrf_token %}
-                    <div class="form__group">
-                        <label>Board Name</label>
-                        {{form.name}}
-                    </div>
-                    <div class="form__action">
-                        <a class="btn btn--dark" href="{{request.META.HTTP_REFERER}}">Cancel</a>
-                        <button class="btn btn--main" type="submit">Create/Update Board</button>
-                    </div>
-                </form>
-            </div>
-        </div> -->
 </main>
 
 
