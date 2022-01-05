@@ -3,23 +3,42 @@
 {% block content %}
 
 <main>
-    <div class="container rounded border border-white px-4" style="background-color: #121212; width:50%; margin-top: 200px;">
-        <h3 class="text-center mt-4 py-4 text-white">Create | Update Your Board</h3>
-        <form class="row py-4" action="" method="POST">
-            {% csrf_token %}
-            <div class="col-12">
-                <label for="inputBoardName" class="form-label text-white">Board Name</label>
-                {% if form.name.value != None %}
-                    <input required type="text" class="form-control  text-white" id="inputBoardName" value="{{form.name.value}}" name="name" style="background-color: #121212;" />
-                {% else %}
-                    <input required type="text" class="form-control  text-white" id="inputBoardName" name="name" placeholder="Choose name for this board..." style="background-color: #121212;" />
-                {% endif %}
+    <div class="container rounded border border-white px-4 py-4" style="width:700px; height: 300px; margin-top: 200px;">
+        <div class="row align-items-center justify-content-center border-bottom border-secondary" style="height: 25%;">
+            <div class="col-auto">
+                <h3 class="text-white">Create | Update Your Board</h3>
             </div>
-            <div class="col-12 gy-4">
-                <button type="submit" class="btn btn-primary">Create | Update</button>
-                <a class="btn btn-primary" href="{{request.META.HTTP_REFERER}}" style="margin: 10px;">Cancel</a>
+        </div>
+        <div class="row" style="height: 75%;">
+            <div class="col">
+                <form method="POST" style="height: 100%">
+                    {% csrf_token %}
+                    {% if form.name.value != None %}
+                        <div class="row align-items-center justify-content-center" style="height:60%">
+                            <label for="inputBoardName" class="col-3 form-label text-white">Board Name</label>
+                            <div class="col-sm-9">
+                                <input required type="text" class="form-control  text-white bg-dark" id="inputBoardName" value="{{form.name.value}}" name="name" />
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="row align-items-center justify-content-center" style="height:60%">
+                            <label for="inputBoardName" class="col-3 form-label text-white">Board Name</label>
+                            <div class="col-sm-9">
+                                <input required type="text" class="form-control  text-white bg-dark" id="inputBoardName" name="name" placeholder="Choose name for this board" />
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="row align-items-end" style="height:40%">
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary">Create | Update</button>
+                        </div>
+                        <div class="col-auto">
+                            <a class="btn btn-warning" href="{{request.META.HTTP_REFERER}}">Cancel</a>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 </main>
 

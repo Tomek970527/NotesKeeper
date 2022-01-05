@@ -11,7 +11,7 @@
             {% if request.user.is_authenticated %}
                 <div class="col-xl-4 py-4">
                     <a href="{% url 'create-board' %}" style="text-decoration: none;" >
-                        <div class="container rounded border border-primary bg-primary btnAdd" style="height: 200px; width: 90%;">
+                        <div class="container rounded border border-primary bg-primary btnAdd" style="height: 200px; width: 100%;">
                             <div class="row align-items-center justify-content-center" style="height: 100%;">
                                 <div class="col-auto">
                                     <h3 class="text-white" >Create Board</h3>
@@ -23,8 +23,8 @@
             {% endif %}
             {% for board in boards %}
                 <div class="col-xl-4 py-4">
-                    <div class="container rounded border border-white py-2" style="height: 200px; width: 90%;">
-                        <div class="row align-items-center py-2 border-bottom border-secondary" style="height:25%;">
+                    <div class="container rounded border border-white" style="height: 200px; width: 100%;">
+                        <div class="row align-items-center border-bottom border-secondary" style="height:25%;">
                             <div class="col">
                                 <a href="{% url 'profile' board.owner.id %}" style="text-decoration: none;">
                                     <span>@{{board.owner}}</span>
@@ -37,22 +37,23 @@
                                     <h4 class="text-white pntName">{{board.name}}</h4>
                                 </a>
                             </div>
-                            <div class="col-auto">
-                                <div class="text-secondary">{{board.created|timesince}} ago</div>
-                            </div>
                         </div>
-                        <div class="row align-items-center py-2 border-bottom border-secondary" style="height:25%;">
+                        <div class="row align-items-center py-2 border-bottom border-secondary" style="height:20%;">
                             <div class="col">
                                 <p class="text-secondary">Number of Notes: {{board.note_set.all.count}}</p>
                             </div>
                         </div>
                         {% if request.user == board.owner %}
-                        <div class="row align-items-center py-2" style="height:25%;">
+                        <div class="row align-items-center py-2" style="height:30%;">
                             <div class="col">
                                 <a class="btn btn-primary" href="{% url 'update-board' board.id %}" style="text-decoration: none;">Rename</a>
-                            </div>
-                            <div class="col-auto">
                                 <a class="btn btn-warning" href="{% url 'delete-board' board.id %}" style="text-decoration: none;">Delete</a>
+                            </div>
+                            <!-- <div class="col-3">
+                                <a class="btn btn-warning" href="{% url 'delete-board' board.id %}" style="text-decoration: none;">Delete</a>
+                            </div> -->
+                            <div class="col-auto align-items-center justify-content-end">
+                                <div class="text-secondary">{{board.created|timesince}} ago</div>
                             </div>
                         </div>
                         {% endif %}
