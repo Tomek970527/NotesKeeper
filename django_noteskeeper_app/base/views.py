@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.db.models import Q
 from django.http import HttpResponse
 from .models import Board, Note
-from .forms import BoardForm, NoteForm, UserForm
+from .forms import BoardForm, NoteForm, CustomUserCreationForm
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -45,14 +45,11 @@ def logout_page(request):
 
 def register_page(request):
     page = 'register'
-    form = UserCreationForm()
+    form = CustomUserCreationForm()
 
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            # userd = form.save()
-            # # user.username = user.username.lower()
-            # userd.save()
             user = form.save()
             login(request, user)
             return redirect('home')
@@ -144,8 +141,11 @@ def create_note(request, pk):
 def update_note(request, pk):
     note = Note.objects.get(id=pk)
     form = NoteForm(instance=note)
+    board = Board.objects.get(id=note.board.id)
 
     if request.method == "POST":
+        note.owner = note.owner
+        note.board = board
         note.topic = request.POST.get('topic')
         note.body = request.POST.get('body')
         note.save()

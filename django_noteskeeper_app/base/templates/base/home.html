@@ -4,9 +4,7 @@
 
 <main>
     <div class="container-lg">
-        <div>
-            <h2 class="text-center mt-3 text-white">Boards</h2>
-        </div>
+        <h2 class="text-center mt-3 text-white">Boards</h2>
         <div class="row">
             {% if request.user.is_authenticated %}
                 <div class="col-xl-4 py-4">
@@ -44,43 +42,19 @@
                             </div>
                         </div>
                         {% if request.user == board.owner %}
-                        <div class="row align-items-center py-2" style="height:30%;">
-                            <div class="col">
-                                <a class="btn btn-primary" href="{% url 'update-board' board.id %}" style="text-decoration: none;">Rename</a>
-                                <a class="btn btn-warning" href="{% url 'delete-board' board.id %}" style="text-decoration: none;">Delete</a>
-                            </div>
-                            <!-- <div class="col-3">
-                                <a class="btn btn-warning" href="{% url 'delete-board' board.id %}" style="text-decoration: none;">Delete</a>
-                            </div> -->
-                            <div class="col-auto align-items-center justify-content-end">
-                                <div class="text-secondary">{{board.created|timesince}} ago</div>
-                            </div>
-                        </div>
-                        {% endif %}
-                        <!-- <div class="position-relative top-50 start-50 translate-middle">
-                            <div class="row">
+                            <div class="row align-items-center py-2" style="height:30%;">
                                 <div class="col">
-                                    <a href="{% url 'profile' board.owner.id %}" style="text-decoration: none;">
-                                    <span>@{{board.owner}}</span>
-                                    </a>
+                                    <a class="btn btn-primary" href="{% url 'update-board' board.id %}" style="text-decoration: none;">Rename</a>
+                                    <a class="btn btn-warning" href="{% url 'delete-board' board.id %}" style="text-decoration: none;">Delete</a>
                                 </div>
-                                <div class="col-auto">
-                                    <div class="text-white">{{board.created|timesince}}</div>
+                                <!-- <div class="col-3">
+                                    <a class="btn btn-warning" href="{% url 'delete-board' board.id %}" style="text-decoration: none;">Delete</a>
+                                </div> -->
+                                <div class="col-auto align-items-center justify-content-end">
+                                    <div class="text-secondary">{{board.updated|timesince}} ago</div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <a href="{% url 'board' board.id %}" style="text-decoration: none;"><h3 class="text-white">{{board.name}}</h3></a>
-                                    <p class="text-secondary">Number of Notes: {{board.note_set.all.count}}</p>
-                                </div>
-                                {% if request.user == board.owner %}
-                                    <div class="col-12">
-                                        <a class="btn btn-primary" href="{% url 'update-board' board.id %}" style="text-decoration: none;">Rename</a>
-                                        <a class="btn btn-warning" href="{% url 'delete-board' board.id %}" style="text-decoration: none;">Delete</a>
-                                    </div>
-                                {% endif %}
-                            </div>     
-                        </div> -->
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}

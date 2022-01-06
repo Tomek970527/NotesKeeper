@@ -3,55 +3,57 @@
 {% block content %}
 
 <main>
-    <div class="container rounded border border-white px-4 py-4" style="width:700px; height: 600px; margin-top: 100px;">
-        <div class="row align-items-center justify-content-center border-bottom border-secondary" style="height: 20%;">
-            <div class="col-auto">
-                <h3 class="text-white">Create | Update Your Note</h3>
-            </div>
-        </div>
-        <div class="row" style="height: 80%;">
+    <div class="container rounded border border-warning px-4 py-4" style="width:700px; height: 600px; margin-top: 100px;">
+        <div class="row" style="height: 100%;">
             <div class="col">
-                <form method="POST" style="height: 100%;">
-                    {% csrf_token %}
-                    <div class="row align-items-center justify-content-center" style="height: 15%;">
-                        <label for="inputNoteTopic" class="col form-label text-white">Note Topic</label>
-                        {% if form.topic.value != None %}
+                {% if request.user == note.owner or form.topic.value == None %}
+                    <form method="POST" style="height: 100%;">
+                        {% csrf_token %}
+                        <div class="row align-items-center justify-content-center border-bottom border-secondary" style="height: 10%;">
+                            {% if form.topic.value != None %}
+                                <div class="col-12">
+                                    <input required type="text" class="form-control  text-white" id="inputNoteTopic" value="{{form.topic.value}}" name="topic" style="background-color: #121212; border: none; outline: none; font-size: 1.7em;" />
+                                </div>
+                            {% else %}
+                                <div class="col-12">
+                                    <input required type="text" class="form-control  text-white" id="inputNoteTopic" placeholder="Name" name="topic" style="background-color: #121212; border: none; outline: none; font-size: 1.7em;" />
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="row py-2" style="height: 75%;">
+                            {% if form.body.value != None %}
+                                <div class="col-12">
+                                    <textarea class="form-control text-white" rows="17" name="body" style="background-color: #121212; border: none; outline: none;">{{form.body.value}}</textarea>
+                                </div>
+                            {% else %}
+                                <div class="col-12" style="height: 100%;">
+                                    <textarea class="form-control text-white" rows="17" name="body" placeholder="Note" style="background-color: #121212; border: none; outline: none;"></textarea>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="row align-items-end" style="height: 15%;">
                             <div class="col">
-                                <input required type="text" class="form-control  text-white bg-dark" id="inputNoteTopic" value="{{form.topic}}" name="topic" />
+                                <button class="btn btn-primary" type="submit">Create | Update Note</button>
                             </div>
-                        {% else %}
-                            <div class="col">
-                                <input required type="text" class="form-control  text-white bg-dark" id="inputNoteTopic" placeholder="Choose name for this note" name="topic" />
+                            <div class="col-auto">
+                                <a class="btn btn-warning" href="{{request.META.HTTP_REFERER}}">Cancel</a>
                             </div>
-                        {% endif %}
-                    </div>
-                    <div class="row" style="height: 70%;">
-                        <label for="inputNoteContent" class="col form-label text-white">Note Content</label>
-                        {% if form.body.value != None %}
-                        <div class="col">
-                            <input required type="text" class="form-control  text-white bg-dark" id="inputNoteContent" value="{{form.body}}" name="body" />
                         </div>
-                        {% else %}
-                        <div class="col" style="height: 100%;">
-                            <input required type="text" class="form-control  text-white bg-dark" id="inputNoteContent" placeholder="Write something" name="body" style="height: 90%;" />
-                        </div>
-                        {% endif %}
-                    </div>
-                    <!-- <label for="board_name">Note Topic</label>
-                    {{form.topic}} -->
-                    <!-- <label for="board_name">Note Content</label> -->
-                    <!-- {{form.body}} -->
-                    <div class="row" style="height: 15%;">
-                        <div class="col">
-                            <button class="btn btn-primary" type="submit">Create/Update Note</button>
-                        </div>
-                        <div class="col">
-                            <a class="btn btn-warning" href="{{request.META.HTTP_REFERER}}">Cancel</a>
+                    </form>
+                {% else %}
+                    <div class="row align-items-center justify-content-center border-bottom border-secondary" style="height: 10%;">
+                        <div class="col-12">
+                            <!-- <input required type="text" class="form-control  text-white" id="inputNoteTopic" value="{{form.topic.value}}" name="topic" style="background-color: #121212; border: none; outline: none;" /> -->
+                            <h4 class="text-white">{{form.topic.value}}</h4>
                         </div>
                     </div>
-                    <!-- <a class="btn btn--dark" href="{{request.META.HTTP_REFERER}}">Cancel</a>
-                    <button class="btn btn--main" type="submit">Create/Update Note</button> -->
-                </form>
+                    <div class="row py-4" style="height: 75%;">
+                        <div class="col-12">
+                            <!-- <textarea class="form-control text-white" rows="17" name="body" style="background-color: #121212; border: none; outline: none;">{{form.body.value}}</textarea> -->
+                            <p class="text-white">{{form.body.value}}</p>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>

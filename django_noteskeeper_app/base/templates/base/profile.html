@@ -1,22 +1,130 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<main class="profile-page layout layout--3">
+<main>
     <div class="container-lg">
-        <div class="boards">
-            <div class="profile">
-                <div class="profile__info">
-                    <h3 class="text-center mt-3">@{{user.username}}</h3>
-                    <!-- <a href="edit-user.html" class="btn btn--main btn--pill">Edit Profile</a> -->
+        <div class="row justify-content-center border-bottom border-secondary">
+            <div class="col-2">
+                <h3 class="text-white text-center" style="height:50%; padding: 0; margin: 0;">@{{user.username}}</h3>
+                <p class="text-white text-center" style="height:50%;">{{user.email}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center mt-3 text-white">User <span class="text-primary">Boards</span></h2>
+            </div>
+        </div>
+        <div class="row">
+            {% if request.user == user %}
+                <div class="col-xl-4 py-4">
+                    <a href="{% url 'create-board' %}" style="text-decoration: none;" >
+                        <div class="container rounded border border-primary bg-primary btnAdd" style="height: 200px; width: 100%;">
+                            <div class="row align-items-center justify-content-center" style="height: 100%;">
+                                <div class="col-auto">
+                                    <h3 class="text-white" >Create Board</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
+            {% endif %}
+            {% for board in user_boards %}
+                <div class="col-xl-4 py-4">
+                    <div class="container rounded border border-white" style="height: 200px; width: 100%;">
+                        <div class="row align-items-center border-bottom border-secondary" style="height:25%;">
+                            <div class="col">
+                                <a href="{% url 'profile' board.owner.id %}" style="text-decoration: none;">
+                                    <span>@{{board.owner}}</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row align-items-center py-2" style="height:25%;">
+                            <div class="col">
+                                <a href="{% url 'board' board.id %}" style="text-decoration: none;">
+                                    <h4 class="text-white pntName">{{board.name}}</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row align-items-center py-2 border-bottom border-secondary" style="height:20%;">
+                            <div class="col">
+                                <p class="text-secondary">Number of Notes: {{board.note_set.all.count}}</p>
+                            </div>
+                        </div>
+                        {% if request.user == board.owner %}
+                            <div class="row align-items-center py-2" style="height:30%;">
+                                <div class="col">
+                                    <a class="btn btn-primary" href="{% url 'update-board' board.id %}" style="text-decoration: none;">Rename</a>
+                                    <a class="btn btn-warning" href="{% url 'delete-board' board.id %}" style="text-decoration: none;">Delete</a>
+                                </div>
+                                <!-- <div class="col-3">
+                                    <a class="btn btn-warning" href="{% url 'delete-board' board.id %}" style="text-decoration: none;">Delete</a>
+                                </div> -->
+                                <div class="col-auto align-items-center justify-content-end">
+                                    <div class="text-secondary">{{board.updated|timesince}} ago</div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center mt-3 text-white">User <span class="text-warning">Notes</span></h2>
             </div>
-            <div class="boards__header">
-                <h2 class="text-center mt-3">User Boards</h2>
-            </div>
+            {% for note in user_notes %}
+                <div class="col-xl-4 py-4">
+                    <div class="container rounded border border-warning py-2" style="height: 200px; width: 100%;">
+                        {% if request.user == note.owner %}
+                            <div class="row align-items-center py-2 border-bottom border-secondary" style="height:25%;">
+                                <div class="col">
+                                    <a href="{% url 'update-note' note.id %}" style="text-decoration: none;">
+                                        <h4 class="pntName">{{ note.topic }}</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row align-items-start py-2 border-bottom border-secondary" style="height:50%;">
+                                <div class="col">
+                                    <p class="text-white">{{ note.body }}</p>
+                                </div>
+                            </div>
+                            <div class="row align-items-center py-2" style="height:25%;">
+                                <div class="col">
+                                    <a href="{% url 'delete-note' note.id %}" class="btn btn-warning">Delete</a>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="text-secondary">{{note.updated|timesince}} ago</div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="row align-items-center py-2 border-bottom border-secondary">
+                                <div class="col">
+                                    <a href="{% url 'update-note' note.id %}" style="text-decoration: none;">
+                                        <h4 class="text-white">{{ note.topic }}</h4>
+                                    </a>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="text-secondary">{{note.created|timesince}} ago</div>
+                                </div>
+                            </div>
+                            <div class="row align-items-start py-2 border-bottom border-secondary">
+                                <div class="col">
+                                    <p class="text-white">{{ note.body }}</p>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+  
+            <!-- <h3 class="text-center mt-3">@{{user.username}}</h3>
+            <h2 class="text-center mt-3">User Boards</h2>
             <div class="row">
                 {% if request.user == user %}
                     <div class="col-xl-4" style="padding: 20px;">
-                        <div class="container border" style="height: 200px; width: 90%;">
+                        <div class="container border" style="height: 200px; width: 100%;">
                             <li>
                                 <a class="btn btn--main" href="{% url 'create-board' %}">Create Board</a>
                             </li>
@@ -25,7 +133,7 @@
                 {% endif %}
                 {% for board in user_boards %}
                     <div class="col-xl-4" style="padding: 20px;">
-                        <div class="container border" style="height: 200px; width: 90%;">
+                        <div class="container border" style="height: 200px; width: 100%;">
                             <li>
                                 <a href="{% url 'board' board.id %}">{{ board }}</a>
                                 {% if request.user == user %}
@@ -37,22 +145,6 @@
                     </div>
                 {% endfor %}
             </div>
-            <!-- <ul class="boards__list">
-                {% for board in user_boards %}
-                <li>
-                    <a href="{% url 'board' board.id %}">{{ board }}</a>
-                    {% if request.user == user %}
-                    <a href="{% url 'update-board' board.id %}">Rename</a>
-                    <a href="{% url 'delete-board' board.id %}">Delete</a>
-                    {% endif %}
-                </li>
-                {% endfor %}
-                <li>
-                    {% if request.user == user %}
-                    <a class="btn btn--main" href="{% url 'create-board' %}">Create Board</a>
-                    {% endif %}
-                </li>
-            </ul> -->
         </div>
         <div class="notes">
             <div class="notes__header">
@@ -61,7 +153,7 @@
             <div class="row">
                 {% for note in user_notes %}
                 <div class="col-xl-4" style="padding: 20px;">
-                    <div class="container border" style="height: 200px; width: 90%;">
+                    <div class="container border" style="height: 200px; width: 100%;">
                         <li>
                             {% if request.user == user %}
                             <a href="{% url 'update-note' note.id %}">{{ note }}</a>
@@ -74,42 +166,7 @@
                 </div>
                 {% endfor %}
             </div>
-            <!-- <ul class="notes__list">
-                {% for note in user_notes %}
-                <li>
-                    {% if request.user == user %}
-                    <a href="{% url 'update-note' note.id %}">{{ note }}</a>
-                    <a href="{% url 'delete-note' note.id %}">Delete</a>
-                    {% else %}
-                    <a href="{% url 'note' note.id %}">{{ note }}</a>
-                    {% endif %}
-                </li>
-                {% endfor %}
-            </ul> -->
-        </div>
-    </div>
+        </div> -->
 </main>
-<!-- 
-<div>
-    <h2>@{{user.username}}</h2>
-    <ul>
-        {% for board in user_boards %}
-           <li><a href="{% url 'board' board.id %}">{{ board }}</a></li>
-           <a href="{% url 'update-board' board.id %}">Update</a> 
-           <a href="">Delete</a>
-           <hr>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'create-board' %}">Create Board</a>
-    <hr>
-    <ul>
-        {% for note in user_notes %}
-           <li><a href="{% url 'note' note.id %}">{{ note }}</a></li>
-           <a href="{% url 'update-note' note.id %}">Update</a> 
-           <a href="">Delete</a>
-           <hr>
-        {% endfor %}
-    </ul>
-</div> -->
 
 {% endblock %}

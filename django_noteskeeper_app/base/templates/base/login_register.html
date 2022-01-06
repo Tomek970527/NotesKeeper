@@ -2,16 +2,94 @@
 
 {% block content %}
 
-{% if page == 'login' %}
+
+<main>
+    {% if page == 'login' %}
+        <div class="container rounded border border-secondary px-4 py-4" style="width:400px; height: 300px; margin-top: 100px;">
+            <div class="row" style="height: 70%;">
+                <div class="col">
+                    <form method="POST" action="" style="height: 100%;">
+                        {% csrf_token %}
+                        <div class="row" style="height: 40%;">
+                            <div class="col">
+                                <!-- <label class="visually-hidden" for="inputUsername">Username</label> -->
+                                <input type="text" name="username" class="form-control text-white" id="inputUsername" placeholder="Username" required style="background-color: #121212;">
+                            </div>
+                        </div>
+                        <div class="row" style="height: 40%;">
+                            <div class="col">
+                                <!-- <label class="visually-hidden" for="inputPassword">Password</label> -->
+                                <input type="password" name="password" class="form-control text-white" id="inputPassword" placeholder="Password" required style="background-color: #121212;">
+                            </div>
+                        </div>
+                        <div class="row justify-content-center" style="height: 20%;">
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary" style="width: 100%;">Log in</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row align-items-center justify-content-center py-4" style="height: 15%;">
+                <div class="col-6 text-center">
+                    <p class="text-white" style="margin: 0; padding: 0; width: 100%;">Haven't signed up yet?</p>
+                </div>
+            </div>
+            <div class="row align-items-center justify-content-center" style="height: 15%;">
+                <div class="col-6 text-center">
+                    <a href="{% url 'register' %}" class="text-primary" style="text-decoration: none;">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="container rounded border border-secondary px-4 py-4" style="width:400px; height: 500px; margin-top: 100px;">
+            <div class="row" style="height: 80%;">
+                <div class="col">
+                    <form method="POST" action="" style="height: 100%;">
+                        {% csrf_token %}
+                        <div class="row" style="height: 20%;">
+                            <div class="col">
+                                <input type="text" name="username" class="form-control text-white" id="inputUsername" placeholder="Username" required style="background-color: #121212;">
+                            </div>
+                        </div>
+                        <div class="row" style="height: 20%;">
+                            <div class="col">
+                                <input type="email" name="email" class="form-control text-white" id="inputEmail" placeholder="Email" required style="background-color: #121212;">
+                            </div>
+                        </div>
+                        <div class="row" style="height: 20%;">
+                            <div class="col">
+                                <input type="password" name="password1" class="form-control text-white" id="inputPassword1" placeholder="Password" required style="background-color: #121212;">
+                            </div>
+                        </div>
+                        <div class="row" style="height: 20%;">
+                            <div class="col">
+                                <input type="password" name="password2" class="form-control text-white" id="inputPassword2" placeholder="Confirm Password" required style="background-color: #121212;">
+                            </div>
+                        </div>
+                        <div class="row" style="height: 20%;">
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary" style="width: 100%;">Sign in</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row align-items-center justify-content-center" style="height: 10%;">
+                <div class="col">
+                    <p class="text-white text-center" style="margin: 0; padding: 0; width: 100%;">Already signed up?</p>
+                </div>
+            </div>
+            <div class="row align-items-center justify-content-center" style="height: 10%;">
+                <div class="col text-center">
+                    <a href="{% url 'login' %}" class="text-primary text-center" style="text-decoration: none;">Log in</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</main>
+<!-- {% if page == 'login' %}
 <div class="container-lg">
-    <!-- <form method="POST" action="">
-        {% csrf_token %}
-        <label>Username</label>
-        <input type="text" name="username" placeholder="Username..."/>
-        <label>Password</label>
-        <input type="password" name="password" placeholder="Password..."/>
-        <input type="submit" value="Submit" />
-    </form> -->
     <form method="POST" action="">
         {% csrf_token %}
         <div class="row align-items-center g-3">
@@ -41,5 +119,5 @@
     <p>Already signed up?</p>
     <a href="{% url 'login' %}">Login</a>
 </div>
-{% endif %}
+{% endif %} -->
 {% endblock %}
